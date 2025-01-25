@@ -22,5 +22,77 @@ app.config['SQLALCHEMY_TEST_MODICIATION'] = False
 
 db = SQLAlchemy(app)
 migrate= Migrate(db,app)
+bcrypt = Bcrypt(app)
 CORS(app,supports_credentials=True)
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+login_manager.init_app(app)
+
+def get_uuid():
+    return uuid4().hex
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.String(11), primary_key=True, unique=True, default=get_uuid)
+    email= db.Column(db.String(150), unique=True)
+    password = db.Column(db.Text, nullable=False)
+    user_type = db.Column(db.String(150), default='student')
+    def __repr__(self):
+        return f"<User{self.email}>"
+    
+
+
+class Opportunities(db.Model):
+    id = db.Column(db.String(11), primary_key=True, unique=True, default=get_uuid)
+    
+    
+
+
+
+@login_manager.user_loader
+
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+    
+
+
+
+
+
+
+
+@login_manager
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    email = request.json["email"]
+    password = request.json["password"]
+
+
+@app.route('/signup', methods=["POST"])
+def signup():
+    email = request.json["email"]
+    password = request.json["password"]
+
+    if User.query.filter_by(email=email).first():
+        return jsonify({"Email": "Unauthorized Access"}), 401
+    
+    hashed_password = bcrypt.generate_hashed_password(password).decode('utf-8')
+    new_user = User(email=email, password=hashed_password)
+
+    db.session(new_user)
+    db.commit()
+
+    login_user(new_user)
+    return jsonify({
+        id: new_user.id, 
+        email: new_user.email,
+
+    })
+    
+
+    
+
+
 
