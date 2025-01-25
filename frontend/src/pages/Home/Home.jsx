@@ -3,7 +3,7 @@
 import "./Home.css"
 
 
-function Home(){
+function Home(props){
 
   return(
     <>
@@ -11,26 +11,27 @@ function Home(){
       <div className="topBar">
         <div>
           <button className="windowExit">
-              x
+              
           </button>
         </div>
         <div className="line-holder">
           <div className="line"> 
-
           </div>
           <div className="line"> 
-
           </div>
           <div className="line"> 
-
           </div>
+        </div>
+        <div className="titleName">
+          Home
         </div>
       </div>
 
+      <div className="content-container">
       <div className="content">
         
       </div>
-
+      </div>
     </div>
     
     </>

@@ -18,7 +18,44 @@
 
 }
 
+.topBar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .line-holder{
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
+  height: 30px;
+  width: 700px;
+  justify-content: space-between;
+}
+
+.line{
+  height: 1px;
+  width: 700px;
+  background-color: #000000;
+}
+
+.titleName{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+
+  font-size: 18px;
+}
+
+.HomeContainer .content{
+  width: 780px;
+  height: 795px;
+  border: 1px solid black;
+
+}
+
+.content-container{
+  display: flex;
+  justify-content: center;
 }
