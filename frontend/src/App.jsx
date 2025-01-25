@@ -5,22 +5,14 @@ import './App.css'
 import NavBar from './components/navBar'
 import Home from './pages/Home/Home'
 
-function App() {
-  const [count, setCount] = useState(0)
-  const [displayHome, setDisplayHome] = useState(true)
+import { Outlet } from 'react-router';
 
-  const homeToggle = () => {
-    setDisplayHome(!displayHome);
-  }
+function App() {
+  //const [count, setCount] = useState(0)
+  //const [displayHome, setDisplayHome] = useState(true)
 
   return (
-      <div className="mainLayout">
-        <NavBar />
-        <div className='container-popUps'>
-          <UserPage />
-        </div>
-        
-      </div>
+    <Outlet />
   )
 }
 

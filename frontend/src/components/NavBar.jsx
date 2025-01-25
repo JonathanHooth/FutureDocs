@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from 'react-router-dom'
 
 import "./NavBar.css"
 
@@ -9,9 +10,11 @@ function NavBar(){
   return(
     <>
     <div className="navBarContainer">
+      <Link className="navLink" to="/" >
       <div className="title">
         SwampHacks
       </div>
+      </Link>
 
       <div className="rightSided">
         <div className="account">
