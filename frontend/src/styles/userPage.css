@@ -4,6 +4,7 @@
     background-color: white;
     border: 2px solid black;
     display: flex column;
+    margin-left: 4%;
 }
 .picNameContainer {
     width: 100%;
