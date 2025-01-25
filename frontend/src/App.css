@@ -2,7 +2,9 @@
 
   width: 100vw;
   height: 100vh;
-
+}
+.container-popUps{
+  width: 100vw;
+  height: 90vh;
   display: flex;
-  
 }
