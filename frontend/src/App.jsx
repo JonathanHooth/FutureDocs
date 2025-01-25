@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 import NavBar from './components/navBar'
+import Home from './pages/Home/Home'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,6 +14,9 @@ function App() {
       <div className="mainLayout">
         <NavBar />
         
+        <div className='HomeScreen' >
+          <Home />
+        </div>
       </div>
     </>
   )
