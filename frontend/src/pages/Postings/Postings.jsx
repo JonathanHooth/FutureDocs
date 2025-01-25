@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 
 import NavBar from "../../components/navBar"
+import JobBlock from '../../components/JobBlock'
+import JobInfo from '../../components/JobInfo'
 
 import "./Postings.css"
 
@@ -35,12 +37,29 @@ function Postings(){
       </div>
       <div className="jobInformationContainer">
         <div className="jobPostContainer">
-
+          <div className="jobRow">
+            <JobBlock />
+            <JobBlock />
+            <JobBlock />
+            <JobBlock />
+          </div>
+          <div className="jobRow">
+            <JobBlock />
+            <JobBlock />
+            <JobBlock />
+            <JobBlock />
+          </div>
+          <div className="jobRow">
+            <JobBlock />
+            <JobBlock />
+            <JobBlock />
+            <JobBlock />
+          </div>
         </div>
 
         <div className="jobDetailContainer">
-
-          </div>
+          <JobInfo id={1} />
+        </div>
         </div>
     </div>
     </div>

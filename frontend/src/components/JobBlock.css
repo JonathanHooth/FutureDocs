@@ -1,0 +1,16 @@
+.jobContainer{
+
+  background-color: aquamarine;
+  height: 100%;
+  width: 20%;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.jobContainer .Header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
