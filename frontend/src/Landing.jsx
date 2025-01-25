@@ -6,6 +6,8 @@ import './App.css'
 import NavBar from './components/navBar'
 import Home from './pages/Home/Home'
 
+import UserPage from './components/userPage'
+
 function Landing() {
   const [count, setCount] = useState(0)
   const [displayHome, setDisplayHome] = useState(true)
@@ -21,8 +23,11 @@ function Landing() {
         
         <div className='HomeScreen'>
           <div className='WindowScreensContainer'>
-          <Home onClick={homeToggle} displayHome={displayHome}/>
+            <UserPage />
+            <Home onClick={homeToggle} displayHome={displayHome}/>
           </div>
+
+          
 
           <div className='appContainer'>
           <div className='appWidgets'>
