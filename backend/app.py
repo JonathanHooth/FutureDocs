@@ -36,6 +36,7 @@ class User(db.Model, UserMixin):
     email= db.Column(db.String(150), unique=True)
     password = db.Column(db.Text, nullable=False)
     user_type = db.Column(db.String(150), default='student')
+
     def __repr__(self):
         return f"<User{self.email}>"
     
@@ -43,9 +44,6 @@ class User(db.Model, UserMixin):
 
 class Opportunities(db.Model):
     id = db.Column(db.String(11), primary_key=True, unique=True, default=get_uuid)
-    
-    
-
 
 
 @login_manager.user_loader
@@ -53,24 +51,29 @@ class Opportunities(db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-    
-
-
-
-
-
-
-
-@login_manager
-
 
 @app.route('/login', methods=['POST'])
 def login():
     email = request.json["email"]
     password = request.json["password"]
 
+    user = User.query.filter_by(email=email).first()
 
-@app.route('/signup', methods=["POST"])
+    if user is None:
+        return jsonify({"Email": "Unauthorized Access"}), 401
+    
+    if not bcrypt.check_password_hash(user.password, password):
+        return jsonify({"error": "Unauthorized"}), 401
+    
+    login_user(user)
+
+    return jsonify({
+        id: user.id, 
+        email: user.email,
+
+    })
+
+@app.route('/signup', methods=['POST'])
 def signup():
     email = request.json["email"]
     password = request.json["password"]
@@ -91,8 +94,13 @@ def signup():
 
     })
     
+@app.route('/logout', methods=['GET'])
+def logout():
+    logout_user
+
 
     
+
 
 
 
