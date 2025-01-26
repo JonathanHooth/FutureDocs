@@ -1,11 +1,12 @@
 .HomeContainer{
-  position: relative;
+  position: absolute;
   width: 700px;
   height: 750px;
   
   border: 1px solid black;
   top: 6%;
-  box-shadow: 5px 5px grey;
+  left:40%;
+
 }
 
 .windowExit{

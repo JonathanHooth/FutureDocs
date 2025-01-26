@@ -1,16 +1,15 @@
 import React from "react"
 import { Link } from 'react-router-dom'
 import "./Home.css"
+import "../../styles/webpage.css"
 
 import RecentPosting from "../../components/RecentPosting"
 
 function Home(props){
 
-  
-
   return(
     props.displayHome ? (<>
-      <div className="HomeContainer">
+      <div className="HomeContainer basicWebStyle">
         <div className="topBar">
           <div>
             <button className="windowExit" onClick={props.onClick}>

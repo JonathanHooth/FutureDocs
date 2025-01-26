@@ -1,10 +1,12 @@
 .userBox {
+    position: absolute;
     width: 25vw;
     height: 80vh;
     background-color: white;
-    border: 2px solid black;
-    display: flex column;
-    margin-left: 4%;
+    border: 1px solid black;
+    left: 5%;
+    top: 3%;
+
 }
 .picNameContainer {
     width: 100%;
@@ -32,19 +34,84 @@
     letter-spacing: 0.1rem;
 }
 .contactContainer {
-    width: 100%;
-    height: 50%;
-    display: flex column;
+    width: 90%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
     font-size: 1.1rem;
     font-family: 'Nanum Myeongjo', serif;
     color: black;
-    margin-left: 9%;
-    margin-top: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    margin-bottom: 10%;
     line-height: 3rem;
+    justify-content: space-evenly;
+
 }
 
 .editButton {
     width: 95%;
     text-align: right;
     margin-top: 5%;
+}
+
+.ModifyInfo{
+    border: 1px solid black;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    height: 90%;
+}
+
+.AccountBox{
+    height: 7%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.AccountBox .line-holder .line{
+    height: 1px;
+    width: 98%;
+    background-color: #000000;
+    
+}
+
+.AccountBox .line-holder{
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+    width: 700px;
+    justify-content: space-between;
+}
+
+.AccountBox .windowExit{
+    margin-top: 30px;
+
+}
+
+.titleAcc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    margin-right: 15px;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+
+.experienceBox{
+    height: 30%;
+}
+
+.myExperience{
+    height: 100%;
+    overflow-y: scroll;
+    text-overflow: ellipsis;
 }
