@@ -62,6 +62,7 @@
   margin-bottom: 50px;
   display: flex;
   flex-direction: column;
+  height: 60px;
 }
 
 .appContainer .appWidgets{

@@ -12,6 +12,7 @@ import {Droppable} from "./scripts/Droppable";
 import {Draggable} from "./scripts/Draggable";
 
 import House from "./assets/house.png"
+import Person from './assets/accountIcon.png'
 
 
 const homeData = {
@@ -182,7 +183,8 @@ function Landing() {
           </div>
           <div className='homeButton'>
           <button className="IconButton" onClick={userOpen}>
-            
+            <img src={Person} style={{ transform: 'translateY(-30px) scale(0.5)' }} />
+
           </button>
             <div className='buttonSubtext'>
             Account
