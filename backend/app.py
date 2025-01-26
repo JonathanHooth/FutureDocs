@@ -192,6 +192,17 @@ def logout():
     else:
         return jsonify({"message": "No user is logged in"}), 400
 
+
+@app.route('/test', methods=['GET'])
+def test_run():
+    return jsonify({
+        "id": "I hate flask",
+        "name": "Jim",
+
+    })
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+
 

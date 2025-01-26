@@ -100,7 +100,14 @@ function Landing() {
 
   }
 
-  
+  const [data, setData] = useState();
+
+  useEffect(()=>{
+    fetch('http://localhost:5000/test')
+    .then(response => response.json())
+    .then(data => setData(data));
+    console.log(`Hi this is ${data.name}`);
+  },[])
 
   return (
     <>
