@@ -14,7 +14,7 @@ function NavBar(){
     <div className="navBarContainer">
       <Link className="navLink" to="/" >
       <div className="title">
-        SwampHacks
+        FutureDocs
       </div>
       </Link>
 

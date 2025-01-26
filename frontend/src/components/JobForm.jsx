@@ -74,16 +74,6 @@ export default function JobForm(props){
 
     const response = await api.post(`http://127.0.0.1:8000/api/create_job/${titleField}/${authorField}/${experienceField}/${locationField}/${emailField}/${phoneField}`)
     console.log(response);
-    /*
-    try {
-      const response = await api.post("http://127.0.0.1:8000/api/create_job_json", formData, {
-        headers: { "Content-Type": "application/json" },
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error creating job:", error.response?.data || error.message);
-    }
-    */
     props.changeMe();
 
   }
@@ -91,33 +81,34 @@ export default function JobForm(props){
   return(<>
     <div className="Job-container">
       <div className="jobMiniContainers">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='form'>
           <div className='title'>
             Title
-            <input onChange={handleTitleChange} value={titleField}/>
+            <input onChange={handleTitleChange} value={titleField} className='inputFieldTime'/>
           </div>
           <div className='author'>
             Author
-            <input onChange={handleAuthorChange} value={authorField}/>
+            <input onChange={handleAuthorChange} value={authorField} className='inputFieldTime'/>
           </div>
           <div className='location'>
             Location
-            <input onChange={handleLocationChange} value={locationField}/>
+            <input onChange={handleLocationChange} value={locationField} className='inputFieldTime'/>
           </div>
           <div className='description'>
             Description
-            <textarea onChange={handleDescriptionChange} value={experienceField}/>
+            <textarea onChange={handleDescriptionChange} className="descriptionText" value={experienceField} maxLength={400} placeholder='400 character limit'/>
+            
           </div>
           <div className='phone'>
             Phone Number
-            <input onChange={handlePhoneChange} value={phoneField}/>
+            <input onChange={handlePhoneChange} value={phoneField} className='inputFieldTime'/>
           </div>
           <div className='email'>
             Email
-            <input onChange={handleEmailChange} value={emailField}/>
+            <input onChange={handleEmailChange} value={emailField} className='inputFieldTime'/>
           </div>
 
-          <button>
+          <button className='createJobButton'>
             Create Posting
           </button>
         </form>

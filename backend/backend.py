@@ -107,3 +107,7 @@ async def get_all_jobs(db: Session = Depends(get_db)):
 @app.get("/api/new_jobs")
 async def get_new_jobs(db: Session = Depends(get_db)):
   return db.query(DBModels.models.Job).order_by(DBModels.models.Job.date.desc()).limit(4).all()
+
+@app.get("/api/jobs/{id}")
+async def get_selected_job(id : int, db: Session = Depends(get_db)):
+  return db.query(DBModels.models.Job).filter(DBModels.models.Job.id == id).first()

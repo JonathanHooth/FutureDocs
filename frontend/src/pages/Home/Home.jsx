@@ -56,7 +56,7 @@ function Home(props){
             Ready to Look for Opportunites?
           </div>
           <div className="PostingHeader">
-              Most Recent Postings
+              Recent Postings
           </div>
 
           <div className="Posting-Container">

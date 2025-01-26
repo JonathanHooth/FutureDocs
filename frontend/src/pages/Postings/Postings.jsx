@@ -8,12 +8,15 @@ import { useState, useEffect } from 'react'
 import "./Postings.css"
 
 import api from '../../api'
+import OSCAd from '../../assets/Ad1.png'
 
 function Postings(){  
 
   const [jobPostings, setJobPostings] = useState([])
+  const [selectedJob, setSelectedJob] = useState(1);
+  const [selectedJobData, setSelectedJobData] = useState()
 
-  const postAmount = 16;
+  const [postAmount, setPostAmount] = useState(jobPostings.length);
 
   const [addPost, setAddPost] = useState(false)
 
@@ -28,9 +31,30 @@ function Postings(){
     console.log(jobPostings)
   }
 
+  const getSelectedJob = async(jobID) =>{
+    const jobObj = await api.get(`/api/jobs/${selectedJob}`)
+    const jobData = jobObj.data;
+    setSelectedJobData(jobData)
+    console.log(jobData);
+  }
+
   useEffect(()=>{
     getPosting();
   },[])
+
+  const changeMyJob = (jobID)=>{
+    console.log("hi")
+    setSelectedJob(jobID);
+  }
+
+  useEffect(()=>{
+    getSelectedJob(selectedJob);
+    console.log(selectedJob)
+  },[selectedJob])
+
+  useEffect(()=>{
+    setPostAmount(jobPostings.length)
+  },[jobPostings])
 
   return(
     <>
@@ -56,47 +80,28 @@ function Postings(){
     </div>
     <div className='PostingBox'>
       <div className="filtercontainer">
-        
+        <div className='OSCAd'>
+          <img src={OSCAd} />
+        </div>
       </div>
       <div className="jobInformationContainer">
         <div className="jobPostContainer">
+          <div className='header'>
+          
           <div className='displayPosts'>
             Displaying {postAmount} Results
           </div>
-          <div>
-            <button onClick={toggleAddForm}>
-              Create new Post
+          <div className='addButton'>
+            <button onClick={toggleAddForm} className='button'>
+              {addPost ? (<>Cancel New Post</>) : (<>Create New Post</>)}
             </button>
           </div>
+
+          </div>
           <div className='jobPostScroll'>
-          {/*
-          <div className="jobRow">
-            <JobBlock />
-            <JobBlock />
-            <JobBlock />
-            <JobBlock />
-          </div>
-          <div className="jobRow">
-            <JobBlock />
-            <JobBlock />
-            <JobBlock />
-            <JobBlock />
-          </div>
-          <div className="jobRow">
-            <JobBlock />
-            <JobBlock />
-            <JobBlock />
-            <JobBlock />
-          </div>
-          <div className="jobRow">
-            <JobBlock />
-            <JobBlock />
-            <JobBlock />
-            <JobBlock />
-          </div>*/}
           
             {jobPostings.map((job, index) =>{
-              return <JobBlock key={job.id} job={job}/>;
+              return <JobBlock key={job.id} job={job} onClick={changeMyJob} />;
             })}
           
           </div>
@@ -106,7 +111,7 @@ function Postings(){
           {addPost ? (<>
           <JobForm changeMe={toggleAddForm}/>
           </>) : 
-          (<JobInfo id={1} />) }
+          (<JobInfo id={selectedJob} job={selectedJobData}/>) }
           
         </div>
         </div>
