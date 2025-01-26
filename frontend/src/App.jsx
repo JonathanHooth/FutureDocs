@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import NavBar from './components/navBar'
 import Home from './pages/Home/Home'
+import Auth from "./components//Auth";
 
 import { Outlet } from 'react-router';
 
