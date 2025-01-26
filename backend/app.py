@@ -67,6 +67,52 @@ class Application(db.Model):
 
     def __repr__(self):
         return f"<Application by User {self.student_id} for Opportunity {self.opportunity_id} with status {self.status}>"
+    
+
+@app.route('/contact_info', methods=['POST'])
+@login_required
+def contact():
+    
+    if current_user.user_type != 'professional':  
+        return jsonify({"error": "Unauthorized Access"}), 401
+      
+    data = request.get_json()   
+    
+    email = current_user.email
+    name = current_user.name  
+   
+    opportunity = Opportunity(
+        title=data.get('title'),
+        description=data.get('description'),
+        location=data.get('location'),
+        professional_id=current_user.id,  
+    )  
+    db.session.add(opportunity)
+    db.session.commit()
+    
+    return jsonify({"message": "Opportunity posted successfully", "opportunity_id": opportunity.id}), 201
+
+
+@app.route('/filter_application', methods=['GET'])
+@login_required
+def search_application():
+    id = request.args.get("id")  
+
+    query = Application.query
+    if id:
+        query = query.filter(
+            Application.user_id == id  
+        )
+    
+    applications = query.all()  
+    results = [
+        {"id": app.id, "title": app.title, "description": app.description, "location": app.location}
+        for app in applications
+    ]
+    
+    return jsonify(results)
+
+
 
 
 @app.route('/login', methods=['POST'])
@@ -148,3 +194,4 @@ def logout():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
