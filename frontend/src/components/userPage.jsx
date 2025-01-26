@@ -2,9 +2,11 @@ import React , {useState}from 'react';
 import "../styles/userPage.css"
 import "../styles/webpage.css"
 
+import { useDraggableContext } from '../scripts/Draggable';
+
 export default function UserPage(props) {
 
-
+    const { setNodeRef, listeners, attributes, style} = useDraggableContext();
 
     const [sampleText, setSampleText] = useState(`Lorem ipsum odor amet, consectetuer adipiscing elit. Litora leo sem fringilla purus at mollis senectus. Praesent molestie eget nisl torquent vulputate. 
                         Fringilla netus per elementum, convallis facilisi morbi et. Phasellus litora praesent lacus adipiscing felis. Parturient ex ex porttitor vehicula mollis 
@@ -76,7 +78,7 @@ export default function UserPage(props) {
         setEditInfo(!editInfo);
     }
     return(
-        props.displayUser ? (<div className='userBox basicWebStyle'>
+        props.displayUser ? (<div className='userBox basicWebStyle' style={{...props.styles, ...style}} >
             <div className='AccountBox'>
             <div>
             <button className="windowExit" onClick={props.onClick}>
@@ -84,7 +86,7 @@ export default function UserPage(props) {
             </button>
             </div>
 
-            <div className="line-holder">
+            <div className="line-holder" ref={setNodeRef} {...listeners} {...attributes}>
                 <div className="line"> 
                 </div>
                 <div className="line"> 
