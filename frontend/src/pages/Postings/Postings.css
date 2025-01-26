@@ -57,3 +57,14 @@
   width: 30%;
   border-left: 1px solid black;
 }
+
+.jobRow{
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+}

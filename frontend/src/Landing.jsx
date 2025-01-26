@@ -10,10 +10,29 @@ import UserPage from './components/userPage'
 
 function Landing() {
   const [count, setCount] = useState(0)
-  const [displayHome, setDisplayHome] = useState(true)
+  const [displayHome, setDisplayHome] = useState(true);
+  const [displayUser, setDisplayUser] = useState(true);
 
   const homeToggle = () => {
     setDisplayHome(!displayHome);
+  }
+  
+  const userToggle = () =>{
+    setDisplayUser(!displayUser);
+  }
+
+  const userOpen = () => {
+    if(!displayUser)
+    {
+      setDisplayUser(true);
+    }
+  }
+
+  const homeOpen = () =>{
+    if(!displayHome)
+    {
+      setDisplayHome(true);
+    }
   }
 
   return (
@@ -23,7 +42,7 @@ function Landing() {
         
         <div className='HomeScreen'>
           <div className='WindowScreensContainer'>
-            <UserPage />
+            <UserPage onClick={userToggle} displayUser={displayUser}/>
             <Home onClick={homeToggle} displayHome={displayHome}/>
           </div>
 
@@ -32,13 +51,13 @@ function Landing() {
           <div className='appContainer'>
           <div className='appWidgets'>
           <div className='homeButton'>
-          <button className="IconButton" onClick={homeToggle}>
+          <button className="IconButton" onClick={homeOpen}>
             
             </button>
             Home
           </div>
           <div className='homeButton'>
-          <button className="IconButton" onClick={homeToggle}>
+          <button className="IconButton" onClick={userOpen}>
             
           </button>
             Account
