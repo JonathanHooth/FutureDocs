@@ -2,10 +2,15 @@ import "./JobBlock.css"
 
 export default function JobBlock(props){
 
+  const jobID = props.job.id;
+
+  const testClick = () =>{
+    console.log("Hi")
+  }
 
   return(
     <>
-    <div className="jobContainer">
+    <div className="jobContainer jobBlockContainer" onClick={() =>{props.onClick(jobID)}}>
       <div className="Header">
       <div className="title">
         {props.job.title}

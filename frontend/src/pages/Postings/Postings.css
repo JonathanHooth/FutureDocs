@@ -93,4 +93,36 @@
   justify-content: center;
   align-items: center;
   height: 10%;
+  flex-grow: 6;
+}
+
+.OSCAd{
+  width: 100%;
+  background-color: red;
+  border-radius: 0 10px 0 0;
+  border: 0 0 0 0;
+  justify-content: center;
+  display: flex;
+  
+}
+
+.jobPostContainer .header{
+  display: flex;
+  flex-direction: row;
+
+}
+
+
+.addButton .button{
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: #dcfbfc;
+  border: 1px solid black;
+  border-radius: 10px;
+  
 }
