@@ -8,22 +8,26 @@ export default function JobBlock(props){
     <div className="jobContainer">
       <div className="Header">
       <div className="title">
-        {props.title}
+        {props.job.title}
       </div>
       <div className="date">
-        {props.date}
+        {new Date(props.job.date).toLocaleDateString('en-GB', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        })}
       </div>
       </div>
 
       <div className="author">
-        {props.author}
+        {props.job.author}
       </div>
       <div className="location">
-        {props.location}
+        {props.job.location}
       </div>
 
       <div className="description">
-        {props.description}
+        {props.job.description}
       </div>
 
     </div>

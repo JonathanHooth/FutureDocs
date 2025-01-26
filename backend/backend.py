@@ -103,3 +103,7 @@ async def create_job(title : str,
 @app.get("/api/jobs")
 async def get_all_jobs(db: Session = Depends(get_db)):
   return db.query(DBModels.models.Job).all()
+
+@app.get("/api/new_jobs")
+async def get_new_jobs(db: Session = Depends(get_db)):
+  return db.query(DBModels.models.Job).order_by(DBModels.models.Job.date.desc()).limit(4).all()

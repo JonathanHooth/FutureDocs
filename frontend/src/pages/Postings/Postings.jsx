@@ -24,12 +24,12 @@ function Postings(){
 
   const getPosting = async() =>{
     const msgList = await api.get("/api/jobs")
-    setJobPostings(msgList);
+    setJobPostings(msgList.data);
+    console.log(jobPostings)
   }
 
   useEffect(()=>{
     getPosting();
-
   },[])
 
   return(
@@ -95,13 +95,9 @@ function Postings(){
             <JobBlock />
           </div>*/}
           
-          <div>
             {jobPostings.map((job, index) =>{
-              <div key={job.id}>
-                <JobBlock />
-              </div>  
+              return <JobBlock key={job.id} job={job}/>;
             })}
-          </div>
           
           </div>
         </div>

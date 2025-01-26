@@ -18,13 +18,13 @@ export default function RecentPosting(props){
 
       <div className="information">
         <div>
-          Title
+          {props.job.title}
         </div>
         <div>
-          Location
+          {props.job.location}
         </div>
         <div>
-          Person
+          {props.job.author}
         </div>
       </div>
       
