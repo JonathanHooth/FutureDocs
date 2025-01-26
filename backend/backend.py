@@ -1,8 +1,11 @@
 from fastapi import FastAPI, HTTPException, Depends, Query, Path
 from fastapi.middleware.cors import CORSMiddleware
 
+from datetime import datetime
+
 #Import Models here
 import DBModels.models
+from APIModels.models import Job 
 
 from typing import List, Optional, Annotated
 
@@ -38,3 +41,65 @@ async def base():
     return {"base"}
 
 
+@app.get("/api/users")
+async def get_all_users(db: Session = Depends(get_db)):
+    return db.query(DBModels.models.User).all()
+
+
+@app.post("/api/create_job_json")
+async def create_job(job: Job, db: Session = Depends(get_db)):
+  
+  new_job = DBModels.models.Job(
+        title=job.title,
+        date=datetime.now(),  # Default value
+        author=job.author,
+        description=job.description,
+        location=job.location,
+        email=job.email,
+        phone=job.phone,
+    )
+
+
+
+  db.add(new_job)
+  db.commit()
+
+  return {"message": "Job added successfully", "job": new_job}
+
+
+
+@app.post("/api/create_job/{title}/{author}/{description}/{location}/{email}/{phone}")
+async def create_job(title : str,
+                      author: str,
+                      description : str,
+                      location : str,
+                      email : str,
+                      phone : str,
+                       db: Session = Depends(get_db)):
+
+  date = datetime.now()
+
+  newJob = Job(title=title, date=date, author=author, description=description, location=location, email=email, phone=phone)
+  
+  #Converting python object to sql object
+  new_job = DBModels.models.Job()
+  new_job.title = newJob.title
+  new_job.date = newJob.date
+  new_job.author = newJob.author
+  new_job.description = newJob.description
+  new_job.location = newJob.location
+  new_job.email = newJob.email
+  new_job.phone = newJob.phone
+
+
+
+  db.add(new_job)
+  db.commit()
+
+  return {"message": "Job added successfully", "job": new_job}
+
+
+
+@app.get("/api/jobs")
+async def get_all_jobs(db: Session = Depends(get_db)):
+  return db.query(DBModels.models.Job).all()

@@ -8,22 +8,22 @@ export default function JobBlock(props){
     <div className="jobContainer">
       <div className="Header">
       <div className="title">
-        Title
+        {props.title}
       </div>
       <div className="date">
-        Date
+        {props.date}
       </div>
       </div>
 
       <div className="author">
-        Professional
+        {props.author}
       </div>
       <div className="location">
-        Location
+        {props.location}
       </div>
 
       <div className="description">
-        This is a long description to simulate an overflow in the text and to prevent it from overflowing and I have needed to type a lot if I want to test this out.
+        {props.description}
       </div>
 
     </div>
