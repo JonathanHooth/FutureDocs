@@ -43,7 +43,13 @@ function Landing() {
         <div className='HomeScreen'>
           <div className='WindowScreensContainer'>
             <UserPage onClick={userToggle} displayUser={displayUser}/>
-            <Home onClick={homeToggle} displayHome={displayHome}/>
+            <Home onClick={homeToggle} 
+            displayHome={displayHome} 
+            styles={{
+                    position: "absolute",
+                    top:"6%",
+                    left:`40%`,
+                    }}/>
           </div>
 
           

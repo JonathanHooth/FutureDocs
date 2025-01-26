@@ -9,7 +9,7 @@ function Home(props){
 
   return(
     props.displayHome ? (<>
-      <div className="HomeContainer basicWebStyle">
+      <div className="HomeContainer basicWebStyle" style={props.styles}>
         <div className="topBar">
           <div>
             <button className="windowExit" onClick={props.onClick}>
