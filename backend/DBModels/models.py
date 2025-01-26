@@ -17,7 +17,7 @@ class Job(Base):
   phone = Column(String(30), nullable=True)  # User phone number (nullable)
   email = Column(String(150), unique=True, nullable=False)
 
-  #author: Column(String(120))
+  author = Column(String(120), nullable=True)
   #author_id: Column(Integer)
   #author: Mapped["User"] = relationship(back_populates="job_list")
   #author_id: Mapped[int] = mapped_column(ForeignKey("users.id"))

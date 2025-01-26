@@ -70,7 +70,7 @@
   height: 5%;
   display: flex;
   align-items: center;
-
+  margin-right: 2%;
 }
 
 .messageName{
@@ -79,7 +79,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
+  font-size: 18px;
 }
 
 
@@ -99,7 +99,6 @@
   height: 65%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin-top: 20px;
   margin-bottom: 20px;
   align-items: center;
@@ -132,6 +131,13 @@
 .goToPostings:hover{
   background-color: #00e5ff;
   color: white;
+}
+
+.messageName{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .link{

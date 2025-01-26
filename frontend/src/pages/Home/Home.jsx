@@ -3,12 +3,27 @@ import { Link } from 'react-router-dom'
 import "./Home.css"
 import "../../styles/webpage.css"
 
+import { useEffect, useState } from "react"
+
+import api from "../../api"
+
 import RecentPosting from "../../components/RecentPosting"
 
 import { useDraggableContext } from "../../scripts/Draggable"
 
 function Home(props){
+  const [newPostings, setNewPostings] = useState([]);
   const { setNodeRef, listeners, attributes, style} = useDraggableContext();
+
+  const getCurrentJobs = async() =>{
+    const newJobs = await api.get("/api/new_jobs");
+    setNewPostings(newJobs.data)
+  }
+
+  useEffect(()=>{
+    getCurrentJobs();
+
+  },[])
 
   return(
     props.displayHome ? (<>
@@ -45,10 +60,9 @@ function Home(props){
           </div>
 
           <div className="Posting-Container">
-            <RecentPosting />
-            <RecentPosting />
-            <RecentPosting />
-            <RecentPosting />
+            {newPostings.map((job, index)=>{
+              return <RecentPosting  job={job} />;
+            })}
           </div>
 
           <div className="container2">
