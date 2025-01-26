@@ -1,7 +1,6 @@
 import React , {useState}from 'react';
 import "../styles/userPage.css"
 import "../styles/webpage.css"
-import { use } from 'react';
 
 export default function UserPage(props) {
 
@@ -24,12 +23,12 @@ export default function UserPage(props) {
     const [year, setYear] = useState(2025);
 
     //input field values
-    const [phoneField, setPhoneField] = useState("")
-    const [emailField, setEmailField] = useState("")
-    const [locationField, setLocationField] = useState("")
-    const [schoolField, setSchoolField] = useState("")
-    const [yearField, setYearField] = useState("")
-    const [experienceField, setExperienceField] = useState("")
+    const [phoneField, setPhoneField] = useState(phone)
+    const [emailField, setEmailField] = useState(email)
+    const [locationField, setLocationField] = useState(location)
+    const [schoolField, setSchoolField] = useState(school)
+    const [yearField, setYearField] = useState(year)
+    const [experienceField, setExperienceField] = useState(sampleText)
 
 
     //Handle changes
@@ -54,21 +53,27 @@ export default function UserPage(props) {
     };
 
     const handleExperienceChange = (e) =>{
-        setExperienceField(e.target.field);
+        setExperienceField(e.target.value);
     }
     
 
     //Tracking for editing
     const [editInfo, setEditInfo] = useState(false);
 
-    const onSubmit = () =>{
+    const updateInformation = (event) =>{
+        event.preventDefault();
+        setPhone(phoneField);
+        setEmail(emailField);
+        setLocation(locationField);
+        setSchool(schoolField);
+        setYear(yearField);
+        setSampleText(experienceField);
 
-
-
+        setEditInfo(!editInfo);
     }
 
     const toggleEdit = () =>{
-        setEditInfo(!editInfo)
+        setEditInfo(!editInfo);
     }
     return(
         props.displayUser ? (<div className='userBox basicWebStyle'>
@@ -93,42 +98,77 @@ export default function UserPage(props) {
 
             </div>
             <div className="ModifyInfo">
-                <div className='editButton'>
-                    <button onClick={toggleEdit}>
-                        <img src="editIcon.png"/>
-                    </button>
-                </div>
+                <div className='header'>
                 <div className='picNameContainer'>
                     <div className='profilePic'></div>
                     <div className='name'>
                         {name}
                     </div>
                 </div>
+                <div className='editButton'>
+                    <button onClick={toggleEdit}>
+                        <img src="editIcon.png"/>
+                    </button>
+                </div>
+                </div>
+                
 
                 <div className='contactContainer'>
-                    <div>
-                        Phone: {editInfo ? (<input value={phoneField} onChange={handlePhoneChange} />) : (<>{phone}</>)}
-                    </div>
-                    <div>
-                        Email: {editInfo ? (<input value={emailField} onChange={handleEmailChange}/>) : (<>{email}</>)}
-                    </div>
-                    <div>
-                        Location(s): {editInfo ? (<input value={locationField} onChange={handleLocationChange}/>) : (<>{location}</>)}
-                    </div>
-                    <div>
-                        School: {editInfo ? (<input value={schoolField} onChange={handleSchoolChange}/>) : (<>{school}</>)}
-                    </div>
-                    <div>
-                        Year: {editInfo ? (<input value={yearField} onChange={handleYearChange}/>) : (<>{year}</>)}
-                    </div>
-                    <div className="experienceBox">
+                    {editInfo ? (<form onSubmit={updateInformation}>
+                        <div>
+                            Phone: <input value={phoneField} onChange={handlePhoneChange} />
+                        </div>
+                        <div>
+                            Email:<input value={emailField} onChange={handleEmailChange}/>
+                        </div>
+                        <div>
+                            Location(s): <input value={locationField} onChange={handleLocationChange}/>
+                        </div>
+                        <div>
+                            School: <input value={schoolField} onChange={handleSchoolChange}/>
+                        </div>
+                        <div>
+                            Year: <input value={yearField} onChange={handleYearChange}/>
+                        </div>    
+                        <div className="experienceBoxEdit">
+                            My Experience
+                        </div>
+                        <div className="myExperienceEdit">
+                            <textarea className="experienceHere" value={experienceField} onChange={handleExperienceChange}/> 
+                        </div>
+
+                        <div className='updateMyInfo'>
+                            <button className="button" type="submit" >
+                                Update Information
+                            </button>
+                        </div>
+                    </form>) : (<>
+                        <div>
+                            Phone: {phone}
+                        </div>
+                        <div>
+                        Email: {email}
+                        </div>
+                        <div>
+                            Location(s): {location}
+                        </div>
+                        <div>
+                            School: {school}
+                        </div>
+                        <div>
+                            Year: {year}
+                        </div>
+                        <div className="experienceBox">
                         <div>
                             My Experience
                         </div>
                         <div className="myExperience">
-                            {editInfo ? (<input  onChange={handleExperienceChange}/>) : (<>{sampleText}</>)}
+                            {sampleText}
                         </div>
                     </div>
+                    </>)}
+                    
+                    
                 </div>
             </div>
         </div>) : <> </>

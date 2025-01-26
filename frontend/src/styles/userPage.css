@@ -6,11 +6,11 @@
     border: 1px solid black;
     left: 5%;
     top: 3%;
-
+    background-color: #dcfbfc;
 }
 .picNameContainer {
     width: 100%;
-    height: 20%;
+    height: 100%;
     display: flex;
     gap: 8%;
     align-items: center;
@@ -35,7 +35,7 @@
 }
 .contactContainer {
     width: 90%;
-    height: 60%;
+    height: 70%;
     display: flex;
     flex-direction: column;
     font-size: 1.1rem;
@@ -43,8 +43,8 @@
     color: black;
     margin-left: 5%;
     margin-right: 5%;
-    margin-top: 5%;
-    margin-bottom: 10%;
+    margin-top: 2%;
+    margin-bottom: 5%;
     line-height: 3rem;
     justify-content: space-evenly;
 
@@ -54,15 +54,16 @@
     width: 95%;
     text-align: right;
     margin-top: 5%;
+    margin-right: 5%;
 }
 
 .ModifyInfo{
     border: 1px solid black;
     margin-left: 15px;
     margin-right: 15px;
-    margin-bottom: 15px;
     margin-top: 10px;
     height: 90%;
+    background-color: white;
 }
 
 .AccountBox{
@@ -110,8 +111,47 @@
     height: 30%;
 }
 
+.experienceBoxEdit{
+    height: 15%;
+}
+
+.myExperienceEdit{
+    height: 40%;
+}
+
 .myExperience{
     height: 100%;
     overflow-y: scroll;
     text-overflow: ellipsis;
+}
+.experienceHere{
+    height: 80%;
+    width: 100%;
+
+}
+
+.updateMyInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+}
+
+.updateMyInfo .button{
+    border-radius: 10px;
+    height: 25px;
+    background-color: #C6F9FF;
+
+}
+
+.updateMyInfo .button:hover{
+    background-color: #00e5ff;
+    color: white;
+}
+
+.ModifyInfo .header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height:18%;
 }

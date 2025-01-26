@@ -4,8 +4,7 @@
   height: 750px;
   
   border: 1px solid black;
-  top: 6%;
-  left:40%;
+  background-color: #dcfbfc;
 
 }
 
@@ -15,7 +14,8 @@
 
   border:none;
   margin: 15px;
-
+  background-color: rgb(174, 200, 201);
+  border: 1px solid black;
 }
 
 .topBar{
@@ -31,6 +31,10 @@
   height: 30px;
   width: 700px;
   justify-content: space-between;
+}
+
+.line-holder:hover{
+  cursor: pointer;
 }
 
 .line{
@@ -52,7 +56,7 @@
   width: 660px;
   height: 680px;
   border: 1px solid black;
-
+  background-color: white;
 }
 
 .content-container{
@@ -81,12 +85,14 @@
 
 .PostingHeader{
   width: 100%;
-  background-color: #C6F9FF;
+  background-color:rgb(210, 242, 255);
   height: 8%;
   text-align: center;
   display: flex;
   justify-content: center;
   padding-top: 20px;
+  font-weight: 700;
+  font-size: 2rem;
 }
 
 .Posting-Container{

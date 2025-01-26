@@ -267,6 +267,15 @@ def logout():
         next_page = url_for('index')
     return redirect(next_page or url_for('index'))
 
+
+@app.route('/test', methods=['GET'])
+def test_run():
+    return jsonify({
+        "id": "I hate flask",
+        "name": "Jim",
+
+    })
+
 if __name__ == "__main__":
     app.run(debug=True)
 
