@@ -8,6 +8,7 @@ from flask_cors import CORS
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 from uuid import uuid4
+from werkzeug.exceptions import BadRequest
 
 
 app = Flask(__name__)
@@ -78,29 +79,31 @@ class Application(db.Model):
 with app.app_context():
     db.create_all()
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["POST", "GET"])
 def login():
-    email = request.json["email"]
-    password = request.json["password"]
+    if request.method == "GET":
+        return jsonify({"message": "Please send a POST request to login"}), 405
 
-    
+    try:
+        data = request.get_json()
+        email = data["email"]
+        password = data["password"]
+    except (BadRequest, KeyError):
+        return jsonify({"error": "Invalid request data"}), 400
+
     user = User.query.filter_by(email=email).first()
 
-    if user is None:
-        return jsonify({"error": "Unauthorized Access"}), 401
+    if user is None or not bcrypt.check_password_hash(user.password, password):
+        return jsonify({"error": "Invalid email or password"}), 401
 
-    
-    if not bcrypt.check_password_hash(user.password, password):
-        return jsonify({"error": "Unauthorized"}), 401
-
-    
     login_user(user)
     session["user_id"] = user.id
 
     return jsonify({
         "id": user.id,
-        "email": user.email
-    })
+        "email": user.email,
+        "message": "Login successful"
+    }), 200
 
 @app.route("/signup", methods=["POST"])
 def signup():
@@ -165,9 +168,71 @@ def search_application():
         {"id": app.id, "title": app.title, "description": app.description, "location": app.location}
         for app in applications
     ]
-    
+
     return jsonify(results)
 
+app.route('/edit/<int:id>', methods=['GET', 'PUT'])
+@login_required
+def edit(id):
+    
+    opportunity_to_edit = Opportunity.query.get_or_404(id)
+    
+    
+    if opportunity_to_edit.professional_id != current_user.id:
+        response = {"error": "You are not authorized to edit this opportunity."}
+        return jsonify(response), 403
+
+    if request.method == 'PUT':  
+        try:
+            
+            data = request.get_json()
+            if not data:
+                return jsonify({"error": "No JSON data provided."}), 400
+
+            
+            opportunity_to_edit.title = data.get('title', opportunity_to_edit.title)
+            opportunity_to_edit.description = data.get('description', opportunity_to_edit.description)
+            opportunity_to_edit.location = data.get('location', opportunity_to_edit.location)
+            opportunity_to_edit.date = data.get('date', opportunity_to_edit.date)
+
+            
+            db.session.commit()
+            response = {"message": "Opportunity edited successfully!"}
+            return jsonify(response), 200
+
+        except Exception as e:
+            response = {"error": f"There was an error editing the opportunity: {str(e)}"}
+            return jsonify(response), 500
+
+    
+    return render_template('edit_opportunity.html', opportunity=opportunity_to_edit)
+
+
+@app.route('/delete/<int:id>', methods=['DELETE'])
+@login_required
+def delete(id):
+    
+    opportunity_to_delete = Opportunity.query.get_or_404(id)
+    
+   
+    if opportunity_to_delete.professional_id != current_user.id:
+        response = {"error": "You are not authorized to delete this opportunity."}
+        return jsonify(response), 403
+    
+    try:
+       
+        db.session.delete(opportunity_to_delete)
+        db.session.commit()
+        response = {"message": "Opportunity deleted successfully!"}
+        return jsonify(response), 200 
+    
+    except Exception as e:
+        
+        app.logger.error(f"Error deleting opportunity {id}: {e}")
+        
+        
+        response = {"error": f"There was an error deleting the opportunity: {str(e)}"}
+        return jsonify(response), 500
 
 
 @app.route('/api/search_opportunities', methods=['GET'])
@@ -193,18 +258,17 @@ def search_opportunities():
 
     return jsonify(results)
 
-
-
-@app.route('/logout')
+@app.route("/logout")
 @login_required
 def logout():
     logout_user()
-    flash("You have successfully logged out.", "info")
-    return redirect(url_for('login'))
+    next_page = request.args.get('next')
+    if next_page == url_for('logout'):
+        next_page = url_for('index')
+    return redirect(next_page or url_for('index'))
 
 if __name__ == "__main__":
     app.run(debug=True)
-
 
 
 
