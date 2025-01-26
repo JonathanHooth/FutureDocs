@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import {useDraggable} from '@dnd-kit/core';
+const DraggableContext = createContext();
 
-function Draggable(props) {
+export function Draggable(props) {
   const {attributes, listeners, setNodeRef, transform} = useDraggable({
-    id: 'draggable',
+    id: props.id,
   });
   const style = transform ? {
     transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-  } : undefined;
+  } : {};
 
   
-  return (
-    <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
+  
+  return ( 
+    <DraggableContext.Provider value={{ attributes, listeners, setNodeRef, style }}>
+    <div>
       {props.children}
-    </button>
+    </div>
+    </DraggableContext.Provider>
   );
+}
+
+// Custom hook to use draggable context
+export function useDraggableContext() {
+  const context = useContext(DraggableContext);
+  if (!context) {
+    throw new Error(
+      'useDraggableContext must be used within a Draggable component'
+    );
+  }
+  return context;
 }

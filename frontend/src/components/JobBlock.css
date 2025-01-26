@@ -1,16 +1,52 @@
 .jobContainer{
 
-  background-color: aquamarine;
-  height: 100%;
-  width: 20%;
+  background-color: rgb(210, 242, 255);
+  height: 90%;
+  width: 18%;
   border: 1px solid black;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  padding: 10px;
 }
 
 .jobContainer .Header{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.jobContainer .title{
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.jobContainer .date{
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.jobContainer .author{
+  font-size: 1rem;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.jobContainer .location{
+  font-size: 1rem;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.jobContainer .description{
+  font-size: 1rem;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  height: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+
 }

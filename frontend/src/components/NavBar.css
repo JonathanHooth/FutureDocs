@@ -9,6 +9,7 @@
 
   display: flex;
   flex-direction: row;
+  background-color: #dcfbfc;
   
 }
 .navLink{
@@ -71,7 +72,7 @@
 
 .rightSided .button{
   border: none;
-  background-color: white;
+  background-color: #dcfbfc;
   font-family: Ubuntu;
   font-size: 18px;
 }

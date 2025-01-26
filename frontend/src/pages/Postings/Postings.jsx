@@ -8,6 +8,8 @@ import "./Postings.css"
 
 function Postings(){
 
+  const postAmount = 16;
+
 
   return(
     <>
@@ -28,7 +30,7 @@ function Postings(){
         </div>
       </div>
       <div className="titleName">
-        Home
+        Postings
       </div>
     </div>
     <div className='PostingBox'>
@@ -37,6 +39,10 @@ function Postings(){
       </div>
       <div className="jobInformationContainer">
         <div className="jobPostContainer">
+          <div className='displayPosts'>
+            Displaying {postAmount} Results
+          </div>
+          <div className='jobPostScroll'>
           <div className="jobRow">
             <JobBlock />
             <JobBlock />
@@ -54,6 +60,14 @@ function Postings(){
             <JobBlock />
             <JobBlock />
             <JobBlock />
+          </div>
+          <div className="jobRow">
+            <JobBlock />
+            <JobBlock />
+            <JobBlock />
+            <JobBlock />
+          </div>
+          
           </div>
         </div>
 

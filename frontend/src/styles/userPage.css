@@ -6,7 +6,7 @@
     border: 1px solid black;
     left: 5%;
     top: 3%;
-
+    background-color: #dcfbfc;
 }
 .picNameContainer {
     width: 100%;
@@ -63,6 +63,7 @@
     margin-right: 15px;
     margin-top: 10px;
     height: 90%;
+    background-color: white;
 }
 
 .AccountBox{

@@ -5,18 +5,21 @@ import "../../styles/webpage.css"
 
 import RecentPosting from "../../components/RecentPosting"
 
+import { useDraggableContext } from "../../scripts/Draggable"
+
 function Home(props){
+  const { setNodeRef, listeners, attributes, style} = useDraggableContext();
 
   return(
     props.displayHome ? (<>
-      <div className="HomeContainer basicWebStyle" style={props.styles}>
+      <div className="HomeContainer basicWebStyle" style={{...props.styles, ...style}}>
         <div className="topBar">
           <div>
             <button className="windowExit" onClick={props.onClick}>
                 
             </button>
           </div>
-          <div className="line-holder">
+          <div className="line-holder" ref={setNodeRef} {...listeners} {...attributes}>
             <div className="line"> 
             </div>
             <div className="line"> 

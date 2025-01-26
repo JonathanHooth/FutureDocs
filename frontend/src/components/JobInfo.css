@@ -1,13 +1,63 @@
 .Job-container{
   height: 100%;
   width: 100%;
+  
 
+}
 
+.jobMiniContainer{
+  height: 95%;
+  width: 90%;
+  display:flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.contactText{
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 
 .contact-info{
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 8%;
+}
+
+.jobMiniContainer .title{
   
+  font-weight: 600;
+  font-size: 2rem;
+  height: 8%;
+}
+
+.jobMiniContainer .date{
+  
+  font-weight: 600;
+  font-size: 1.2rem;
+  height: 5%;
+}
+
+.jobMiniContainer .author{
+  font-weight: 600;
+  font-size: 1.2rem;
+  height: 5%;
+}
+
+.jobMiniContainer .description{
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 1.5rem;
+  height: 70%;
+}
+
+.jobMiniContainer .description .description-text{
+  margin-top: 20px;
+  font-weight: 400;
+  font-size: 1rem;
+
 }
