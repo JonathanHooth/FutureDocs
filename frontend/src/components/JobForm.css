@@ -1,0 +1,27 @@
+.Job-container{
+  height: 100%;
+  width: 100%;
+}
+
+.jobMiniContainers{
+  height: 100%;
+  width: 100%;
+
+}
+
+.jobMiniContainers .title{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.jobMiniContainers .location{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.jobMiniContainers .description{
+  display: flex;
+  flex-direction: column;
+}

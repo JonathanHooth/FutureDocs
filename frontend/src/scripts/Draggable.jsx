@@ -14,7 +14,7 @@ export function Draggable(props) {
   
   return ( 
     <DraggableContext.Provider value={{ attributes, listeners, setNodeRef, style }}>
-    <div>
+    <div onClick={props.onClick}>
       {props.children}
     </div>
     </DraggableContext.Provider>

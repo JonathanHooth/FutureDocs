@@ -10,6 +10,8 @@ import {DndContext} from '@dnd-kit/core';
 import {Droppable} from "./scripts/Droppable";
 import {Draggable} from "./scripts/Draggable";
 
+import House from "./assets/house.png"
+
 
 const homeData = {
   position:{
@@ -33,13 +35,13 @@ function Landing() {
   const [displayHome, setDisplayHome] = useState(true);
   const [homeInfo, setHomeInfo] = useState(homeData);
   const homePositionRef = useRef(homeInfo.position);
-
+  //User Page Info
   const [displayUser, setDisplayUser] = useState(true);
   const [userInfo, setUserInfo] = useState(userData);
   const userPositionRef = useRef(userInfo.position);
 
   const homeToggle = () => {
-    setDisplayHome(!displayHome);
+    
     setHomeInfo((prev)=>({
       ...prev,
       priority : 10,
@@ -50,19 +52,29 @@ function Landing() {
       priority : userInfo.priority - 1,
     }));
   }
-
-
   const userToggle = () =>{
-    setDisplayUser(!displayUser);
+    
     setUserInfo((prev)=>({
       ...prev,
       priority : 10,
     }));
 
+    setHomeInfo((prev)=>({
+      ...prev,
+      priority : homeInfo.priority - 1,
+    }));
+    console.log(`User ${userInfo.priority} should be above Home ${homeInfo.priority}`)
   }
+  const userClose= () => {
+    if(displayUser)
+    {
+      setDisplayUser(false);
+    }
+  }
+
   const userOpen = () => {
     if(!displayUser)
-   {
+    {
       setDisplayUser(true);
     }
   }
@@ -73,20 +85,30 @@ function Landing() {
     }
   }
 
+  const homeClose = () =>{
+    if(displayHome)
+    {
+      setDisplayHome(false);
+    }
+  }
+
 
   function handleDragEnd(ev){
-    console.log(ev.id)
+    if(ev.active.id === 'home'){
+
+      let newX = homePositionRef.current.x + ev.delta.x;
+      let newY = homePositionRef.current.y + ev.delta.y;
 
       homePositionRef.current = {
-        x: homePositionRef.current.x + ev.delta.x,
-        y: homePositionRef.current.y + ev.delta.y,
+        x: newX,
+        y: newY,        
       };
-  
+      
       setHomeInfo(prev => ({
         ...prev,
         position: homePositionRef.current,
       }));
-      if (ev.id === 'user'){
+    }else if(ev.active.id === 'user'){
       userPositionRef.current = {
         x: userPositionRef.current.x + ev.delta.x,
         y: userPositionRef.current.y + ev.delta.y,
@@ -102,11 +124,20 @@ function Landing() {
 
   const [data, setData] = useState();
 
+  const getInfo = async() => {
+    try{
+      const response = await fetch('http://localhost:5000/tests')
+      const resp = await response.json();
+      console.log(resp.name)
+    }catch(error){
+      console.log("Connection Failed")
+    }
+  }
+
   useEffect(()=>{
-    fetch('http://localhost:5000/test')
-    .then(response => response.json())
-    .then(data => setData(data));
-    console.log(`Hi this is ${data.name}`);
+    console.log("Getting Request")
+    getInfo();
+
   },[])
 
   return (
@@ -118,8 +149,8 @@ function Landing() {
           <DndContext onDragEnd={handleDragEnd}>
           <Droppable>
           <div className='WindowScreensContainer'>
-            <Draggable id="user">
-            <UserPage onClick={userToggle} 
+            <Draggable id="user" onClick={userToggle}>
+            <UserPage onClick={userClose} 
                       displayUser={displayUser}
                       styles={{
                         position: "absolute",
@@ -129,8 +160,8 @@ function Landing() {
                         }}
                       />
             </Draggable>
-            <Draggable id="home">
-            <Home onClick={homeToggle} 
+            <Draggable id="home" onClick={homeToggle}>
+            <Home onClick={homeClose} 
             displayHome={displayHome} 
             styles={{
                     position: "absolute",
@@ -147,15 +178,19 @@ function Landing() {
           <div className='appWidgets'>
           <div className='homeButton'>
           <button className="IconButton" onClick={homeOpen}>
-            
+            <img className="House" src={House} />
             </button>
+            <div className='buttonSubtext'>
             Home
+            </div>
           </div>
           <div className='homeButton'>
           <button className="IconButton" onClick={userOpen}>
             
           </button>
+            <div className='buttonSubtext'>
             Account
+            </div>
           </div>
           </div>
 

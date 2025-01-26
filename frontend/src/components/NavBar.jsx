@@ -2,17 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 
-function NavBar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Example state for user login status
-
-<<<<<<main
-
 import { Date } from "./ClockTime/Date"
 import { Clock } from "./ClockTime/Clock"
 
 function NavBar(){
 
-
+  
 
   return(
     <>
@@ -35,6 +30,7 @@ function NavBar(){
         <div className="date">
           <Date />
         </div>
+      </div>
       </div>
     </>
   );

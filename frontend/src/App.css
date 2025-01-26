@@ -42,9 +42,21 @@
   border: none;
   height: 50px;
   width: 50px;
-  
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0,0,0,0);
 }
+.House{
+  height: 50px;
+  width: 50px;
+}
+.buttonSubtext{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 
+}
 .homeButton{
   margin-top: 50px;
   margin-bottom: 50px;
