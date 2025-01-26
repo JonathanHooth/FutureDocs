@@ -10,6 +10,8 @@ import {DndContext} from '@dnd-kit/core';
 import {Droppable} from "./scripts/Droppable";
 import {Draggable} from "./scripts/Draggable";
 
+import House from "./assets/house.png"
+
 
 const homeData = {
   position:{
@@ -176,15 +178,19 @@ function Landing() {
           <div className='appWidgets'>
           <div className='homeButton'>
           <button className="IconButton" onClick={homeOpen}>
-            
+            <img className="House" src={House} />
             </button>
+            <div className='buttonSubtext'>
             Home
+            </div>
           </div>
           <div className='homeButton'>
           <button className="IconButton" onClick={userOpen}>
             
           </button>
+            <div className='buttonSubtext'>
             Account
+            </div>
           </div>
           </div>
 

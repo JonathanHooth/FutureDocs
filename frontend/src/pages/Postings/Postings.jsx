@@ -3,13 +3,20 @@ import { Link } from 'react-router-dom'
 import NavBar from "../../components/navBar"
 import JobBlock from '../../components/JobBlock'
 import JobInfo from '../../components/JobInfo'
-
+import JobForm from '../../components/jobForm'
+import { useState } from 'react'
 import "./Postings.css"
 
 function Postings(){
 
   const postAmount = 16;
 
+  const [addPost, setAddPost] = useState(true)
+
+
+  const toggleAddForm = () => {
+    setAddPost(!addPost);
+  }
 
   return(
     <>
@@ -72,7 +79,11 @@ function Postings(){
         </div>
 
         <div className="jobDetailContainer">
-          <JobInfo id={1} />
+          {addPost ? (<>
+          <JobForm changeMe={toggleAddForm}/>
+          </>) : 
+          (<JobInfo id={1} />) }
+          
         </div>
         </div>
     </div>
