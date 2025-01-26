@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
+import api from './api'
 
 import NavBar from './components/navBar'
 import Home from './pages/Home/Home'
@@ -125,13 +126,8 @@ function Landing() {
   const [data, setData] = useState();
 
   const getInfo = async() => {
-    try{
-      const response = await fetch('http://localhost:5000/tests')
-      const resp = await response.json();
-      console.log(resp.name)
-    }catch(error){
-      console.log("Connection Failed")
-    }
+    const msg = await api.get("/")
+    console.log(msg.data);
   }
 
   useEffect(()=>{

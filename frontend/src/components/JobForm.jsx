@@ -1,5 +1,6 @@
 import {useState} from 'react'
 
+import api from '../api';
 
 import "./JobForm.css"
 export default function JobForm(props){
@@ -7,14 +8,29 @@ export default function JobForm(props){
   const [title, setTitle] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("");
   const [author, setAuthor] = useState("")
-  const [date, setDate] = useState("")
+  const [date, setDate] = useState(new Date())
   const [description, setDescription] = useState("")
+  
   //const [] = useState("")
+
+  /**
+   * title = job.title
+  date = datetime.now()
+  author = job.author
+  description = job.description
+  location = job.location
+  email = job.email
+  phone = job.phone
+   */
 
 
   const [titleField, setTitleField] = useState('')
   const [locationField, setLocationField] = useState('')
   const [experienceField, setExperienceField] = useState('')
+  const [emailField, setEmailField] = useState('')
+  const [phoneField, setPhoneField] = useState('')
+  const [authorField, setAuthorField] = useState('')
+ 
 
   //Handle changes
   const handleTitleChange = (e) => {
@@ -29,21 +45,45 @@ export default function JobForm(props){
       setLocationField(e.target.value);
   };
 
-  const handleSchoolChange = (e) => {
-      setSchoolField(e.target.value);
+  const handleAuthorChange = (e) => {
+    setAuthorField(e.target.value);
   };
 
-  const handleYearChange = (e) => {
-      setYearField(e.target.value);
+  const handlePhoneChange = (e) => {
+    setPhoneField(e.target.value);
   };
 
   const handleDescriptionChange = (e) =>{
       setExperienceField(e.target.value);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
+    const formData = {
+      title : titleField,
+      author : authorField,
+      description : experienceField,
+      location : locationField,
+      email : emailField,
+      phone : phoneField,
+      date : date
+    };
+
+    console.log(formData)
+
+    const response = await api.post(`http://127.0.0.1:8000/api/create_job/${titleField}/${authorField}/${experienceField}/${locationField}/${emailField}/${phoneField}`)
+    console.log(response);
+    /*
+    try {
+      const response = await api.post("http://127.0.0.1:8000/api/create_job_json", formData, {
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error creating job:", error.response?.data || error.message);
+    }
+    */
     props.changeMe();
 
   }
@@ -56,6 +96,10 @@ export default function JobForm(props){
             Title
             <input onChange={handleTitleChange} value={titleField}/>
           </div>
+          <div className='author'>
+            Author
+            <input onChange={handleAuthorChange} value={authorField}/>
+          </div>
           <div className='location'>
             Location
             <input onChange={handleLocationChange} value={locationField}/>
@@ -63,6 +107,14 @@ export default function JobForm(props){
           <div className='description'>
             Description
             <textarea onChange={handleDescriptionChange} value={experienceField}/>
+          </div>
+          <div className='phone'>
+            Phone Number
+            <input onChange={handlePhoneChange} value={phoneField}/>
+          </div>
+          <div className='email'>
+            Email
+            <input onChange={handleEmailChange} value={emailField}/>
           </div>
 
           <button>

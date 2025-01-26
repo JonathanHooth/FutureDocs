@@ -1,21 +1,22 @@
 from typing import Optional, List
 from pydantic import BaseModel
-from datetime import date
+from datetime import datetime, date
 
-class Job(BaseModel){
+class Job(BaseModel):
   title: str
-  date: date
+  date: datetime
+  phone : str
+  email: str
   author: str
   description: str
   location: str
-}
 
-class User(BaseModel){
+
+class User(BaseModel):
   name: str
+  phone : str
   email: str
   location: str
   school: str
   year: int
   experience: str
-
-}

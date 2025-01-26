@@ -12,11 +12,16 @@ class Job(Base):
   title = Column(String(120), nullable=False)
   date = Column(DateTime, default=datetime.now)
 
-  description = Column(String(), nullable=True)
+  description = Column(String(500), nullable=True)
   location = Column(String(200), nullable=True)
+  phone = Column(String(30), nullable=True)  # User phone number (nullable)
+  email = Column(String(150), unique=True, nullable=False)
 
-  author: Mapped["User"] = relationship(back_populates="job_list")
-  author_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+  #author: Column(String(120))
+  #author_id: Column(Integer)
+  #author: Mapped["User"] = relationship(back_populates="job_list")
+  #author_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+
 
 
 class User(Base):
@@ -28,9 +33,9 @@ class User(Base):
   location = Column(String(200), nullable=True)  # User location (nullable)
   school = Column(String(200), nullable=True)  # User school (nullable)
   year = Column(String(10), nullable=True)  # User year (nullable)
-  experience = Column(String(), nullable=True)  # User experience (nullable)
+  experience = Column(String(500), nullable=True)  # User experience (nullable)
 
-  job_list: Mapped[List["Job"]] = relationship(back_populates="author")
+  #job_list: Mapped[List["Job"]] = relationship(back_populates="author")
 
   def repr(self):
       return f"<User {self.name}, {self.email}>"
