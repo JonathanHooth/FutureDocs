@@ -13,13 +13,33 @@ function NavBar() {
         </Link>
 
         <div className="rightSided">
-          <div className="account">
-            <Link className="navLink" to="/auth">
-              <button className="button">
-                {isLoggedIn ? "Log Out" : "Sign In"}
+          {!isLoggedIn && (
+            <>
+              <div className="account">
+                <Link className="navLink" to="/auth">
+                  <button className="button">Log In</button>
+                </Link>
+              </div>
+              <div className="account">
+                <Link className="navLink" to="/auth">
+                  <button className="button">Sign In</button>
+                </Link>
+              </div>
+            </>
+          )}
+          {isLoggedIn && (
+            <div className="account">
+              <button
+                className="button"
+                onClick={() => {
+                  setIsLoggedIn(false); // Simulate logout
+                  alert("Logged out successfully!");
+                }}
+              >
+                Log Out
               </button>
-            </Link>
-          </div>
+            </div>
+          )}
           <div className="time">11:06 AM</div>
           <div className="date">26 Jan 2025</div>
         </div>
